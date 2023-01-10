@@ -1,10 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-const assetSchema = new Schema ({
+const assetSchema = new Schema({
     _id: {
 
     },
     number: {
+        //asset number
         type: String,
         required: true,
         trim: true
@@ -14,20 +15,17 @@ const assetSchema = new Schema ({
         default: Date.now
     },
     length: {
+        //asset length in meters
         type: Number,
         required: true
     },
-    department: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    location: {
+    address: {
         type: String,
         required: true,
         trim: true
     },
     area: {
+        //north / south / east / west
         type: String,
         required: true,
         trim: true
@@ -42,7 +40,7 @@ const assetSchema = new Schema ({
         required: true,
         trim: true
     },
-    
+
 
 })
 
