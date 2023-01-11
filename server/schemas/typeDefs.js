@@ -6,6 +6,43 @@ const typeDefs = gql`
     name: String
   }
 
+  type Asset {
+    _id: ID
+    number: int
+    date: String
+    length: int
+    address: String
+    area: String
+    priority: String
+    status: String
+  }
+
+  type Department {
+    _id: ID
+    name: String
+  }
+
+  type Issue {
+    _id: ID
+    name: String
+  }
+
+  type WorkOrder {
+    _id: ID
+    contractor: String
+    date: String
+    asset: int
+    cctvFootage: String
+    reviewed: String
+    assesed: String
+    acessibility: String
+    reviewer: String
+    cctvQuality: String
+    cctvViewed: String
+    additionalNotes: String
+
+  }
+
   type Product {
     _id: ID
     name: String
