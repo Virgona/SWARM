@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const Asset = require('./Asset');
 
 const workOrderSchema = new Schema({
   _id: {
@@ -16,9 +17,7 @@ const workOrderSchema = new Schema({
   },
   asset: {
     //referancing asset schema
-    type: Number,
-    required: true,
-    trim: true
+    type: Schema.Types.ObjectId, ref: 'Asset'
   },
   cctvFootage: {
     //link to display or upload cctv footage

@@ -8,9 +8,9 @@ const typeDefs = gql`
 
   type Asset {
     _id: ID
-    number: int
+    number: Int
     date: String
-    length: int
+    length: Int
     address: String
     area: String
     priority: String
@@ -31,7 +31,7 @@ const typeDefs = gql`
     _id: ID
     contractor: String
     date: String
-    asset: int
+    asset: Int
     cctvFootage: String
     reviewed: String
     assesed: String
@@ -83,6 +83,8 @@ const typeDefs = gql`
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
+    asset(asset: ID, name: String): Asset
+    workorder(asset: ID, _id: ID): WorkOrder
   }
 
   type Mutation {
@@ -91,6 +93,17 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
+    addWorkOrder(contractor: String!, 
+    date: String!, 
+    asset: Int!, 
+    cctvFootage: String!, 
+    reviewed: String!, 
+    assesed: String!, 
+    acessibility: String!, 
+    reviewer: String!, 
+    cctvQuality: String!,
+    cctvViewed: String!,
+    additionalNotes: String!): WorkOrder
   }
 `;
 
