@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const departmentSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    }
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  }
 });
 
 const Department = mongoose.model('Department', departmentSchema);
