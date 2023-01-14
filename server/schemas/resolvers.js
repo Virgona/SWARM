@@ -117,12 +117,11 @@ const resolvers = {
 
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
+    // adding a new work order. Where job is the users input for the order
+    addWorkOrder: async (parent, { job }, context) => {
       console.log(context);
       if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        const order = new WorkOrder({ job });
 
         return order;
       }
