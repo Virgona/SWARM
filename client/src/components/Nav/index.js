@@ -19,7 +19,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { StyledEngineProvider } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
@@ -102,12 +101,6 @@ const Nav = () => {
           {['Work Order', 'Daily Jobs', 'All Jobs', 'Log Out'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  {index[0] = ListAlt}
-                  {index[1] = ViewList}
-                  {index[2] = ViewList}
-                  {index[3] = Logout}
-                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
