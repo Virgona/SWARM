@@ -1,180 +1,122 @@
 import * as React from 'react';
-import Auth from '../../utils/auth';
-import { Link } from "react-router-dom";
+import ViewList from '@mui/icons-material/ViewList';
+import Logout from '@mui/icons-material/Logout';
+import ListAlt from '@mui/icons-material/ListAlt';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Paper from '@mui/material/Paper';
-import ViewList from '@mui/icons-material/ViewList';
-import Logout from '@mui/icons-material/Logout';
-import ListAlt from '@mui/icons-material/ListAlt';
-import WaterIcon from '@mui/icons-material/Water';
-import PersonIcon from '@mui/icons-material/Person';
+import { StyledEngineProvider } from '@mui/material/styles';
 
-const data = [
-  { icon: <ListAlt />, label: 'Work Orders' },
-  { icon: <ViewList />, label: 'All Jobs' },
-  { icon: <ViewList />, label: 'Daily Jobs' },
-  { icon: <Logout />, label: 'Log Out' },
-];
+const drawerWidth = 240;
 
-const NavList = styled(List)({
-  '& .MuiListItemButton-root': {
-    paddingLeft: 24,
-    paddingRight: 24,
-  },
-  '& .MuiListItemIcon-root': {
-    minWidth: 0,
-    marginRight: 16,
-  },
-  '& .MuiSvgIcon-root': {
-    fontSize: 20,
-  },
-});
-function CustomizedList() {
-  const [menu] = React.useState(true);
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+
+const Nav = () => {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
   return (
     <Box sx={{ display: 'flex' }}>
-      <ThemeProvider
-        theme={createTheme({
-          components: {
-            MuiListItemButton: {
-              defaultProps: {
-                disableTouchRipple: true,
-              },
-            },
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Menu
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
           },
-          palette: {
-            mode: 'dark',
-            primary: { main: 'rgb(102, 157, 246)' },
-            background: { paper: 'rgb(5, 30, 52)' },
-          },
-        })}
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
       >
-        <Paper elevation={0} sx={{ maxWidth: 256 }}>
-          <NavList component="nav" disablePadding>
-            <ListItemButton component="a" href="#customized-list">
-              <WaterIcon color='primary' fontSize="small" />
-              <ListItemText
-                sx={{ my: 0 }}
-                primary="SWARM"
-                primaryTypographyProps={{
-                  fontSize: 20,
-                  fontWeight: 'medium',
-                  letterSpacing: 0,
-                }}
-              />
-            </ListItemButton>
-            <Divider />
-            <ListItem component="div" disablePadding>
-              <ListItemButton sx={{ height: 56 }}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {['Work Order', 'Daily Jobs', 'All Jobs', 'Log Out'].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
                 <ListItemIcon>
-                  <PersonIcon color="primary" />
+                  {index[0] = ListAlt}
+                  {index[1] = ViewList}
+                  {index[2] = ViewList}
+                  {index[3] = Logout}
                 </ListItemIcon>
-                <ListItemText
-                  primary="User"
-                  primaryTypographyProps={{
-                    color: 'primary',
-                    fontWeight: 'medium',
-                    variant: 'body2',
-                  }}
-                />
+                <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
-            <Divider />
-            <Box>
-              {menu &&
-                data.map((item) => (
-                  <ListItemButton
-                    key={item.label}
-                    sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
-                  >
-                    <ListItemIcon sx={{ color: 'inherit' }}>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.label}
-                      primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium' }}
-                    />
-                  </ListItemButton>
-                ))}
-            </Box>
-          </NavList>
-        </Paper>
-      </ThemeProvider>
+          ))}
+        </List>
+        <Divider />
+
+      </Drawer>
     </Box>
   );
 }
-
-
-function Nav() {
-
-  function showNavigation() {
-    if (Auth.loggedIn()) {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            {/* add links to dail job page and all jobs pages here */}
-            <Link to="/dailyJobs">
-              Daily Jobs
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/allJobs">
-              All Jobs
-            </Link>
-          </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
-        </ul>
-      );
-    } else {
-      return (
-        <div>
-          {CustomizedList}
-        </div>
-      );
-    }
-
-    // return (
-    //   <ul className="flex-row">
-    //     <li className="mx-1">
-    //       <Link to="/signup">
-    //         Signup
-    //       </Link>
-    //     </li>
-    //     <li className="mx-1">
-    //       <Link to="/login">
-    //         Login
-    //       </Link>
-    //     </li>
-    //   </ul>
-    //     // );
-    //   }
-  }
-
-  return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          SWARM
-        </Link>
-      </h1>
-
-      <nav>
-        {showNavigation()}
-      </nav>
-    </header>
-  );
-}
-
 export default Nav;
