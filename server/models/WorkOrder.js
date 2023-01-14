@@ -2,9 +2,7 @@ const { Schema, model } = require('mongoose');
 const Asset = require('./Asset');
 
 const workOrderSchema = new Schema({
-  _id: {
 
-  },
   contractor: {
     //whis is or has done the work
     type: String,
