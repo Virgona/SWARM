@@ -47,7 +47,7 @@ db.once('open', async () => {
     },
   ]);
 
-  console.log('Assets Seeded!')
+  console.log('Assets Seeded!');
 
   await WorkOrder.deleteMany();
 
@@ -61,7 +61,7 @@ db.once('open', async () => {
       assesed: 'No',
       acessibility: 'Sidewalk',
       reviewer: 'Martin',
-      cctvQuality: 'bad',
+      cctvQuality: 'poor',
       cctvViewed: 'Yes',
       additionalNotes: 'Walls falling apart'
     },
@@ -87,7 +87,7 @@ db.once('open', async () => {
       assesed: 'Yes',
       acessibility: 'Street Access',
       reviewer: 'Nathan',
-      cctvQuality: 'Great',
+      cctvQuality: 'Good',
       cctvViewed: 'Yes',
       additionalNotes: ''
     },

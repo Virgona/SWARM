@@ -31,7 +31,7 @@ const typeDefs = gql`
     _id: ID
     contractor: String
     date: String
-    asset: Int
+    asset: Asset
     cctvFootage: String
     reviewed: String
     assesed: String
@@ -64,7 +64,6 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
   }
 
   type Checkout {
