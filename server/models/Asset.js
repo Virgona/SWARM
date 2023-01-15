@@ -1,9 +1,8 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const assetSchema = new Schema({
-  _id: {
-
-  },
   number: {
     //asset number
     type: String,
@@ -18,6 +17,9 @@ const assetSchema = new Schema({
     //asset length in meters
     type: Number,
     required: true
+  },
+  video: {
+    type: String,
   },
   address: {
     type: String,
@@ -44,5 +46,5 @@ const assetSchema = new Schema({
 
 });
 
-const Asset = model('Asset', assetSchema);
+const Asset = mongoose.model('Asset', assetSchema);
 module.exports = Asset;

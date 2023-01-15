@@ -31,7 +31,7 @@ const typeDefs = gql`
     _id: ID
     contractor: String
     date: String
-    asset: Asset
+    asset (asset:ID, number: String): [Asset]
     cctvFootage: String
     reviewed: String
     assesed: String

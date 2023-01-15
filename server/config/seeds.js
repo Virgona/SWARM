@@ -1,12 +1,11 @@
 const db = require('./connection');
-const { User, WorkOrder, Asset, Department, Issue } = require('../models');
-const { assertAbstractType } = require('graphql');
+const { User, WorkOrder, Asset, Department } = require('../models');
 
 db.once('open', async () => {
   // removing previously stored Departments and seeding in pre written seeds
   await Department.deleteMany();
 
-  const departments = await Department.insertMany([
+  const Departments = await Department.insertMany([
     { name: 'Worker' },
     { name: 'Admin' },
     { name: 'Main Water People' }
@@ -23,7 +22,7 @@ db.once('open', async () => {
       date: '07/11/1992',
       length: 12,
       address: '123 Fake St',
-      area: 'Springfield',
+      area: 'west',
       priority: 'urgent',
       status: 'new'
     },
@@ -32,18 +31,18 @@ db.once('open', async () => {
       date: '01/10/2003',
       length: 45.95,
       address: 'loser St',
-      area: 'Blacktown',
+      area: 'north',
       priority: 'low',
-      status: 'almost done'
+      status: 'pending approval'
     },
     {
       number: 2,
       date: '03/05/2023',
       length: 321.01,
       address: 'long Ave',
-      area: 'Gosford',
+      area: 'south',
       priority: 'low',
-      status: 'almost done'
+      status: 'pending final review'
     },
   ]);
 
@@ -55,27 +54,27 @@ db.once('open', async () => {
     {
       contractor: 'Andrews Dad',
       date: '01/01/2023',
-      asset: assets[1],
+      asset: assets[1]._id,
       cctvFootage: 'Available',
       reviewed: 'No',
       assesed: 'No',
       acessibility: 'Sidewalk',
       reviewer: 'Martin',
       cctvQuality: 'poor',
-      cctvViewed: 'Yes',
+      cctvViewed: 'pre',
       additionalNotes: 'Walls falling apart'
     },
     {
       contractor: 'Damien',
       date: '25/01/2023',
-      asset: assets[2],
+      asset: assets[2]._id,
       cctvFootage: 'N/A',
       reviewed: 'No',
       assesed: 'No',
       acessibility: 'Manhole inside Kitchen',
       reviewer: 'Andrews Dad',
       cctvQuality: 'N/A',
-      cctvViewed: 'No',
+      cctvViewed: 'post',
       additionalNotes: 'You need to code to enter the house'
     },
     {
@@ -88,7 +87,7 @@ db.once('open', async () => {
       acessibility: 'Street Access',
       reviewer: 'Nathan',
       cctvQuality: 'Good',
-      cctvViewed: 'Yes',
+      cctvViewed: 'pre & post',
       additionalNotes: ''
     },
   ]);
