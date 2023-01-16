@@ -60,7 +60,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addAsset(_id: ID, number: String, date: Float, length: Float, address: String, area: String, priority: String, status: String): Asset
     addWorkOrder(contractor: String!, asset: String!, cctvFootage: String!, reviewed: String!, assesed: String!, acessibility: String!, reviewer: String!, cctvQuality: String!, cctvViewed: String!, additionalNotes: String!): WorkOrder
-    updateWorkOrder(scontractor: String, asset: String, cctvFootage: String, reviewed: String, assesed: String, acessibility: String, reviewer: String, cctvQuality: String, cctvViewed: String, additionalNotes: String): WorkOrder
+    updateWorkOrder(contractor: String, asset: String, cctvFootage: String, reviewed: String, assesed: String, acessibility: String, reviewer: String, cctvQuality: String, cctvViewed: String, additionalNotes: String): WorkOrder
   }
 `;
 

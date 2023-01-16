@@ -71,7 +71,8 @@ const resolvers = {
     },
     // updating a prexisting work order. Searched by ID
     updateWorkOrder: async (parent, args, context) => {
-      const updatedWorkOrder = await WorkOrder.findByIdAndUpdate(context.workorder._id, args, { new: true });
+      const filter = context.workorder_id;
+      const updatedWorkOrder = await WorkOrder.findOneAndUpdate(filter, args, { new: true });
       return updatedWorkOrder;
     },
     updateUser: async (parent, args, context) => {
