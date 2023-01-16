@@ -10,7 +10,7 @@ const assetSchema = new Schema({
     trim: true
   },
   date: {
-    type: Date,
+    type: Number,
     default: Date.now
   },
   length: {
