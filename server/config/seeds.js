@@ -19,7 +19,7 @@ db.once('open', async () => {
   const assets = await Asset.insertMany([
     {
       number: 3,
-      date: '07/11/1992',
+      date: new Date(1992, 7, 11).getTime(),
       length: 12,
       address: '123 Fake St',
       area: 'west',
@@ -28,7 +28,7 @@ db.once('open', async () => {
     },
     {
       number: 1,
-      date: '01/10/2003',
+      date: new Date(2003, 1, 10).getTime(),
       length: 45.95,
       address: 'loser St',
       area: 'north',
@@ -37,7 +37,7 @@ db.once('open', async () => {
     },
     {
       number: 2,
-      date: '03/05/2023',
+      date: new Date(2023, 3, 05).getTime(),
       length: 321.01,
       address: 'long Ave',
       area: 'south',
@@ -53,8 +53,8 @@ db.once('open', async () => {
   const jobs = await WorkOrder.insertMany([
     {
       contractor: 'Andrews Dad',
-      date: '01/01/2023',
-      asset: assets[1]._id,
+      date: new Date(2023, 1, 01).getTime(),
+      asset: assets[0]._id,
       cctvFootage: 'Available',
       reviewed: 'No',
       assesed: 'No',
@@ -66,8 +66,8 @@ db.once('open', async () => {
     },
     {
       contractor: 'Damien',
-      date: '25/01/2023',
-      asset: assets[2]._id,
+      date: new Date(2023, 5, 01).getTime(),
+      asset: assets[1]._id,
       cctvFootage: 'N/A',
       reviewed: 'No',
       assesed: 'No',
@@ -79,8 +79,8 @@ db.once('open', async () => {
     },
     {
       contractor: 'Steve',
-      date: '30/12/2022',
-      asset: assets[3],
+      date: new Date(2022, 10, 12).getTime(),
+      asset: assets[2]._id,
       cctvFootage: 'Yes',
       reviewed: 'No',
       assesed: 'Yes',
@@ -97,15 +97,13 @@ db.once('open', async () => {
   await User.deleteMany();
 
   await User.create({
-    firstName: 'Nathan',
-    lastName: 'Washington',
+    username: 'Nathan',
     email: 'nath.w@swarm.com',
     password: 'password12345',
   });
 
   await User.create({
-    firstName: 'Martin',
-    lastName: 'Water',
+    username: 'Martin',
     email: 'Martain.W@swarm.com',
     password: 'password12345'
   });
