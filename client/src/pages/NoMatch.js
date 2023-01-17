@@ -13,83 +13,263 @@ import Checkbox from '@mui/material/Checkbox';
 import LinearProgress from '@mui/material/LinearProgress';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
+import Card from '@mui/material/Card';
+import { CardActionArea } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
+import CardHeader from '@mui/material/CardHeader';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 
 const NoMatch = () => {
 
-  const [progress, setProgress] = React.useState(0);
+  const [asset, setAsset] = React.useState('');
+  const handleAsetSelect = (event) => {
+    setAsset(event.target.value);
+  }
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 100);
-      });
-    }, 500);
+  const [reviewStatus, setReviewStatus] = React.useState('');
+  const handleReviewChange = (event) => {
+    setReviewStatus(event.target.value);
+  }
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  const [cctvQuality, setCCTVQuality] = React.useState('');
+  const handleCCTVChange = (event) => {
+    setCCTVQuality(event.target.value);
+  }
+
+  const [viewStatus, setCCTVViewed] = React.useState('');
+  const handleViewedChange = (event) => {
+    setCCTVViewed(event.target.value);
+  }
+
+  const [viewAssets, setAssetWork] = React.useState('');
+  const handleAssetSelect = (event) => {
+    setAssetWork(event.target.value);
+  }
 
 
   return (
-    <Container maxWidth="60%" sx={{ mt: 6 }}>
-      <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
-        <Paper sx={{ bgcolor: '#', width: '40%', ml: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography sx={{ mt: 4, mb: 1 }} variant="h6">
-                Asset Number
-              </Typography>
-              <List>
+    <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
+      <Grid container rowSpacing={1} >
+        <Grid item xs={6}>
+          <Paper sx={{ bgcolor: 'white', width: '40vw', ml: 3, mt: 15 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography sx={{ mt: 3, ml: 2 }} variant="h6">
+                  Asset Number
+                </Typography>
+                <List>
 
-                <ListItem>
-                  <ListItemText primary="Date:" />
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Date:" />
+                  </ListItem>
 
-                <ListItem>
-                  <ListItemText primary="Asset length:" />
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Asset length:" />
+                  </ListItem>
 
-                <ListItem>
-                  <ListItemText primary="Department:" />
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Department:" />
+                  </ListItem>
 
-                <ListItem>
-                  <ListItemText primary="Address:" />
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Address:" />
+                  </ListItem>
 
-                <ListItem>
-                  <ListItemText primary="Area:" />
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Area:" />
+                  </ListItem>
 
-                <ListItem>
-                  <FormControl component="fieldset">
-                    <FormLabel component="legend">Priority</FormLabel>
-                    <FormGroup aria-label="position" row>
-                      <FormControlLabel control={<Checkbox />} label="Low" labelPlacement="top" />
-                      <FormControlLabel control={<Checkbox />} label="Medium" labelPlacement="top" />
-                      <FormControlLabel control={<Checkbox />} label="High" labelPlacement="top" />
-                    </FormGroup>
-                  </FormControl>
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Priority:" />
+                  </ListItem>
 
-                <ListItem>
-                  Status
-                  <Box sx={{ width: '100%', ml: 2 }}>
-                    <LinearProgress variant="determinate" value={progress} />
-                  </Box>
-                </ListItem>
+                  <ListItem>
+                    <ListItemText primary="Status:" />
+                  </ListItem>
 
-              </List>
+                  <ListItem>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">Work Required</FormLabel>
+                      <FormGroup aria-label="position" row>
+                        <FormControlLabel control={<Checkbox />} labelPlacement="top" />
+                      </FormGroup>
+                    </FormControl>
+                  </ListItem>
+
+                </List>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Card raised={true} sx={{
+            width: 'md',
+            bgcolor: "grey.700",
+            color: "white",
+            mt: 14
+
+          }}>
+            <CardHeader title='CCTV Footage' />
+            <CardActionArea>
+              <CardMedia
+                component='video'
+                image={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+              />
+            </CardActionArea>
+          </Card>
+
+        </Grid>
+      </Grid>
+
+      <Paper component="form" raised={true} sx={{ width: '100%', mt: 5, bgcolor: "white" }}>
+        <Typography sx={{ mt: 5, ml: 2 }} variant="h6">
+          Work Order
+        </Typography>
+
+        <FormGroup aria-label="position" row >
+          <Grid container column spacing={{ xs: 1, sm: 2, md: 3 }} justify content="center" alignItems="center">
+            <Grid item xs={3}>
+              <TextField id="outlined-basic" label="Work to be carried out" variant="filled" />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField color="success" id="outlined-basic" label="CCTV footage link" variant="filled" />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField id="outlined-basic" label="Accessability" variant="filled" />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField id="outlined-basic" label="Contractor" variant="filled" />
             </Grid>
           </Grid>
-        </Paper>
-      </Box>
+        </FormGroup>
+
+        <FormGroup aria-label="position" row >
+          <Grid container column spacing={{ xs: 1, sm: 2, md: 3 }} justify content="center" alignItems="center">
+            <Grid item xs={3}>
+              <ListItem >
+                <FormControl fullWidth>
+                  <InputLabel id="AssetSelect">Asset</InputLabel>
+                  <Select
+                    labelId="AssetSelect"
+                    id="demo-simple-select"
+                    value={reviewStatus}
+                    label="AssetSelect"
+                    onChange={handleAsetSelect}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItem>
+            </Grid>
+
+            <Grid item xs={3}>
+              <ListItem>
+                <FormControl fullWidth>
+                  <InputLabel id="ReviewStatus">Review status</InputLabel>
+                  <Select
+                    labelId="ReviewStatus"
+                    value={reviewStatus}
+                    label="Review status"
+                    onChange={handleReviewChange}
+                    labelPlacement="top"
+                  >
+                    <MenuItem value={'pre'}>Pre</MenuItem>
+                    <MenuItem value={'post'}>Post</MenuItem>
+                    <MenuItem value={'pre-&-post'}>Pre & Post</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItem>
+            </Grid>
+
+            <Grid item xs={3}>
+              <ListItem>
+                <FormControl fullWidth>
+                  <InputLabel id="ReviewStatus">CCTV Quality</InputLabel>
+                  <Select
+                    labelId="cctvQuality"
+                    value={cctvQuality}
+                    label="CCTV Quality"
+                    onChange={handleCCTVChange}
+                    labelPlacement="top"
+                  >
+                    <MenuItem value={'poor'}>Poor</MenuItem>
+                    <MenuItem value={'fair'}>Fair</MenuItem>
+                    <MenuItem value={'good'}>Good</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItem>
+            </Grid>
+
+            <Grid item xs={3}>
+              <ListItem>
+                <FormControl fullWidth>
+                  <InputLabel id="viewStatus">Review status</InputLabel>
+                  <Select
+                    labelId="viewStatus"
+                    value={viewStatus}
+                    label="CCTV Viewed"
+                    onChange={handleViewedChange}
+                    labelPlacement="top"
+                  >
+                    <MenuItem value={'no'}>No</MenuItem>
+                    <MenuItem value={'yes'}>Yes</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItem>
+            </Grid>
+          </Grid >
+        </FormGroup>
+
+        <FormGroup aria-label="position" row>
+          <Grid container column spacing={{ xs: 1, sm: 2, md: 3 }} justify content="center" alignItems="center">
+
+            <Grid item xs={3}>
+              <TextField id="outlined-basic" label="Work to be carried out" variant="filled" />
+            </Grid>
+
+            <Grid item xs={3}>
+              <TextField id="outlined-basic" label="Work to be carried out" variant="filled" />
+            </Grid>
+
+            <Grid item xs={3}>
+              <TextField id="outlined-basic" label="Work to be carried out" variant="filled" />
+            </Grid>
+
+            <Grid item xs={3}>
+              <ListItem>
+                <FormControl fullWidth>
+                  <InputLabel id="setAssetWork">Review status</InputLabel>
+                  <Select
+                    labelId="setAssetWork"
+                    value={viewAssets}
+                    label="view all assets"
+                    onChange={handleAssetSelect}
+                    labelPlacement="top"
+                  >
+                    <MenuItem value={'allAssets'}>All Assets</MenuItem>
+
+                  </Select>
+                </FormControl>
+              </ListItem>
+            </Grid>
+          </Grid>
+        </FormGroup>
+
+        <FormGroup aria-label="position" row>
+          <Grid container spacing={1} justifyContent="center" alignItems="center">
+
+            <Grid item>
+              <TextField id="outlined-basic" label="Other Notes" variant="filled" />
+            </Grid>
+
+          </Grid>
+        </FormGroup>
+
+      </Paper>
     </Container >
   );
 };
