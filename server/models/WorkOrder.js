@@ -65,6 +65,12 @@ const workOrderSchema = new Schema({
     trim: true
   },
 
+  issues: {
+    // this is the problem with asset/job
+    type: [String],
+    trim: true
+  }
+
 
 
 });

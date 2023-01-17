@@ -62,7 +62,8 @@ db.once('open', async () => {
       reviewer: 'Martin',
       cctvQuality: 'poor',
       cctvViewed: 'pre',
-      additionalNotes: 'Walls falling apart'
+      additionalNotes: 'Walls falling apart',
+      issues: 'Cracked Pipe'
     },
     {
       contractor: 'Damien',
@@ -75,7 +76,8 @@ db.once('open', async () => {
       reviewer: 'Andrews Dad',
       cctvQuality: 'N/A',
       cctvViewed: 'post',
-      additionalNotes: 'You need to code to enter the house'
+      additionalNotes: 'You need to code to enter the house',
+      issues: ['cracked pipe', 'roots']
     },
     {
       contractor: 'Steve',
@@ -88,7 +90,8 @@ db.once('open', async () => {
       reviewer: 'Nathan',
       cctvQuality: 'Good',
       cctvViewed: 'pre & post',
-      additionalNotes: ''
+      additionalNotes: '',
+      issues: ['cracked pipe', 'roots', 'puncture']
     },
   ]);
 

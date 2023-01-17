@@ -1,11 +1,6 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type Category {
-    _id: ID
-    name: String
-  }
-
   type Asset {
     _id: ID
     number: String
@@ -18,11 +13,6 @@ const typeDefs = gql`
   }
 
   type Department {
-    _id: ID
-    name: String
-  }
-
-  type Issue {
     _id: ID
     name: String
   }
@@ -40,23 +30,8 @@ const typeDefs = gql`
     cctvQuality: String
     cctvViewed: String
     additionalNotes: String
+    issues: [String]
 
-  }
-
-  type Product {
-    _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
-    category: Category
-  }
-
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
   }
 
   type User {
@@ -66,22 +41,13 @@ const typeDefs = gql`
     email: String
   }
 
-  type Checkout {
-    session: ID
-  }
-
   type Auth {
     token: ID
     user: User
   }
 
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
     user: User
-    order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
     assets: [Asset]
     asset(id: ID!, name: String): Asset
     workorders: [WorkOrder]
@@ -90,9 +56,7 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
     addAsset(_id: ID, number: String, date: Float, length: Float, address: String, area: String, priority: String, status: String): Asset
     addWorkOrder(contractor: String!, asset: String!, cctvFootage: String!, reviewed: String!, assesed: String!, acessibility: String!, reviewer: String!, cctvQuality: String!, cctvViewed: String!, additionalNotes: String!): WorkOrder

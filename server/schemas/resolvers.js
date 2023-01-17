@@ -1,7 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order, Asset, Department, Issue, WorkOrder } = require('../models');
+const { User, Asset, WorkOrder } = require('../models');
 const { signToken } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
@@ -72,7 +71,8 @@ const resolvers = {
     },
     // updating a prexisting work order. Searched by ID
     updateWorkOrder: async (parent, args, context) => {
-      const updatedWorkOrder = await WorkOrder.findByIdAndUpdate(context.workorder._id, args, { new: true });
+      const filter = context.workorder_id;
+      const updatedWorkOrder = await WorkOrder.findOneAndUpdate(filter, args, { new: true });
       return updatedWorkOrder;
     },
     updateUser: async (parent, args, context) => {
@@ -81,11 +81,6 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
-    },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
 
     login: async (parent, { email, password }) => {
