@@ -50,6 +50,16 @@ const NoMatch = () => {
     setAssetWork(event.target.value);
   }
 
+  const [issues, setIssues] = React.useState('');
+  const handleIssueSelection = (event) => {
+    setIssues(event.target.value);
+  }
+
+  const [reviewer, setReviewer] = React.useState('');
+  const handleUserReviewer = (event) => {
+    setReviewer(event.target.value);
+  }
+
 
   return (
     <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
@@ -175,7 +185,6 @@ const NoMatch = () => {
                     value={reviewStatus}
                     label="Review status"
                     onChange={handleReviewChange}
-                    labelPlacement="top"
                   >
                     <MenuItem value={'pre'}>Pre</MenuItem>
                     <MenuItem value={'post'}>Post</MenuItem>
@@ -194,7 +203,6 @@ const NoMatch = () => {
                     value={cctvQuality}
                     label="CCTV Quality"
                     onChange={handleCCTVChange}
-                    labelPlacement="top"
                   >
                     <MenuItem value={'poor'}>Poor</MenuItem>
                     <MenuItem value={'fair'}>Fair</MenuItem>
@@ -207,16 +215,15 @@ const NoMatch = () => {
             <Grid item xs={3}>
               <ListItem>
                 <FormControl fullWidth>
-                  <InputLabel id="viewStatus">Review status</InputLabel>
+                  <InputLabel id="userReviewer">reviewer</InputLabel>
                   <Select
-                    labelId="viewStatus"
+                    labelId="userReviewer"
                     value={viewStatus}
-                    label="CCTV Viewed"
-                    onChange={handleViewedChange}
-                    labelPlacement="top"
+                    label="reviewer"
+                    onChange={handleUserReviewer}
                   >
-                    <MenuItem value={'no'}>No</MenuItem>
-                    <MenuItem value={'yes'}>Yes</MenuItem>
+                    <MenuItem value={'no'}>list of users</MenuItem>
+
                   </Select>
                 </FormControl>
               </ListItem>
@@ -248,7 +255,6 @@ const NoMatch = () => {
                     value={viewAssets}
                     label="view all assets"
                     onChange={handleAssetSelect}
-                    labelPlacement="top"
                   >
                     <MenuItem value={'allAssets'}>All Assets</MenuItem>
 
@@ -264,6 +270,27 @@ const NoMatch = () => {
 
             <Grid item>
               <TextField id="outlined-basic" label="Other Notes" variant="filled" />
+            </Grid>
+
+            <Grid item xs={3}>
+              <ListItem>
+                <FormControl fullWidth>
+                  <InputLabel id="issueSelect">Select issues</InputLabel>
+                  <Select
+                    labelId="issueSelect"
+                    value={issues}
+                    label="Select issues"
+                    onChange={handleIssueSelection}
+                  >
+                    <MenuItem value={'crack'}>Crack</MenuItem>
+                    <MenuItem value={'puncture'}>Puncture</MenuItem>
+                    <MenuItem value={'roots'}>Roots</MenuItem>
+                    <MenuItem value={'collapse'}>Collapse</MenuItem>
+                    <MenuItem value={'clean/cctv'}>Clean/CCTV</MenuItem>
+                    <MenuItem value={'other'}>Other</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItem>
             </Grid>
 
           </Grid>
