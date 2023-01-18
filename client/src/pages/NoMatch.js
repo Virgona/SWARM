@@ -1,4 +1,8 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_ASSET } from "../utils/queries";
+
+// MUI styling imports
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -24,6 +28,15 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 const NoMatch = () => {
+
+  // querying the database on page load
+  const { loading, data } = useQuery(QUERY_ASSET, {
+    variables: { number: '1' }
+  });
+  const [currentAsset, setCurrentAsset] = React.useState('');
+
+  currentAsset = data;
+  console.log(currentAsset)
 
   const [asset, setAsset] = React.useState('');
   const handleAsetSelect = (event) => {
@@ -59,7 +72,7 @@ const NoMatch = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography sx={{ mt: 3, ml: 2 }} variant="h6">
-                  Asset Number
+                  {currentAsset.number}
                 </Typography>
                 <List>
 
