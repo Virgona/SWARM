@@ -83,3 +83,17 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_ASSET = gql`
+  query getAsset($number: String) {
+    asset(number: $number) {
+      number
+      date
+      length
+      video
+      address
+      area
+      priority
+      status
+    }
+  }
+`;
