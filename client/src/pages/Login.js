@@ -5,11 +5,6 @@ import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 //MUI styling imports
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);

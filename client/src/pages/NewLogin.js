@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -8,10 +7,10 @@ import Auth from '../utils/auth';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import FormGroup from '@mui/material/FormGroup';
-import TextField from '@mui/material/TextField';
-import Image from 'mui-image'
+import Button from '@mui/material/Button';
 
 function NewLogin(props) {
     const [formState, setFormState] = useState({ email: '', password: '' });
@@ -40,25 +39,48 @@ function NewLogin(props) {
 
     return (
         <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
-            <Paper component="form" raised={true} sx={{ width: '100%', mt: 5, bgcolor: "white" }}>
-                <Typography sx={{ mt: 5, ml: 2 }} variant="h6">
-                    Work Order
-                </Typography>
+            <Grid container rowSpacing={3} justify content="center" alignItems="center">
+                <Grid item xs={10} >
+                    <Paper sx={{ bgcolor: 'white', width: '40vw', mt: 10 }} >
+                        <Typography sx={{ ml: 2 }} variant="h6" justify content="center" alignItems="center">
+                            Log In
+                        </Typography>
 
-                <FormGroup aria-label="position" row >
-                    <Grid container column spacing={{ xs: 1, sm: 2, md: 3 }} justify content="center" alignItems="center">
-                        <Image src='swar-logo.png' />
-                        <Grid item xs={3}>
-                            <TextField id="outlined-basic" label="Accessability" variant="filled" />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <TextField id="outlined-basic" label="Contractor" variant="filled" />
-                        </Grid>
-                    </Grid>
-                </FormGroup>
-            </Paper>
-        </Container>
-    );
+                        <FormGroup aria-label="position" row >
+                            <Grid container justify content="center" alignItems="center">
+                                <Grid container >
+                                    <Grid item sx={{ ml: 3, mb: 3 }} xs={10}>
+                                        <TextField
+                                            sx={{ width: '100%' }}
+                                            id="filled-password-input"
+                                            label="Password"
+                                            type="password"
+                                            variant="filled"
+                                        />
+                                    </Grid>
+
+                                    <Grid item sx={{ ml: 3, mb: 3 }} xs={10}>
+                                        <TextField
+                                            sx={{ width: '100%' }}
+                                            id="filled-password-input"
+                                            label="Username"
+                                            type="Username"
+                                            variant="filled"
+                                        />
+                                    </Grid>
+
+                                    <Grid item sx={{ ml: 3, mb: 3 }} xs={10} >
+                                        <Button variant="contained">Submit</Button>
+                                    </Grid>
+
+                                </Grid>
+                            </Grid>
+                        </FormGroup>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Container >
+    )
 }
 
 export default NewLogin
