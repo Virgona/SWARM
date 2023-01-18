@@ -1,9 +1,8 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_ASSET } from "../utils/queries";
+import { useQuery } from '@apollo/client';
+import { QUERY_ASSET } from '../utils/queries';
 
 // MUI styling imports
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -14,7 +13,6 @@ import ListItemText from '@mui/material/ListItemText';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import LinearProgress from '@mui/material/LinearProgress';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Card from '@mui/material/Card';
@@ -25,20 +23,11 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-
+import { useParams } from 'react-router-dom';
 
 const NoMatch = () => {
 
-  // querying the database on page load
-  const { loading, data } = useQuery(QUERY_ASSET, {
-    variables: { number: '1' }
-  });
-  const [currentAsset, setCurrentAsset] = React.useState('');
-
-  currentAsset = data;
-  console.log(currentAsset)
-
-  const [asset, setAsset] = React.useState('');
+  const [assetSelect, setAsset] = React.useState('');
   const handleAsetSelect = (event) => {
     setAsset(event.target.value);
   }
@@ -64,17 +53,31 @@ const NoMatch = () => {
   }
 
 
+  const { assetId } = useParams();
+  const { loading, data } = useQuery(QUERY_ASSET, {
+    variables: { assetId: assetId }
+  });
+
+  const asset = data?.asset;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
       <Grid container rowSpacing={1} >
         <Grid item xs={6}>
-          <Paper sx={{ bgcolor: 'white', width: '40vw', ml: 3, mt: 15 }}>
+          <Paper sx={{ bgcolor: 'white', width: '35vw', ml: 3, mt: 15 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography sx={{ mt: 3, ml: 2 }} variant="h6">
-                  {currentAsset.number}
+                  Asset Number: {asset && asset.map((through) => (
+                    asset.number
+                  ))}
+
                 </Typography>
+
                 <List>
+
 
                   <ListItem>
                     <ListItemText primary="Date:" />
@@ -169,7 +172,7 @@ const NoMatch = () => {
                   <Select
                     labelId="AssetSelect"
                     id="demo-simple-select"
-                    value={reviewStatus}
+                    value={assetSelect}
                     label="AssetSelect"
                     onChange={handleAsetSelect}
                   >
