@@ -15,6 +15,20 @@ export const QUERY_PRODUCTS = gql`
     }
   }
 `;
+export const QUERY_ASSET = gql`
+  query getAsset($asset: ID) {
+    asset {
+      number
+      date
+      length
+      video
+      address
+      area
+      priority
+      status
+    }
+  }
+`;
 
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
@@ -69,17 +83,3 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_ASSET = gql`
-  query getAsset() {
-    asset {
-      number
-      date
-      length
-      video
-      address
-      area
-      priority
-      status
-    }
-  }
-`;
