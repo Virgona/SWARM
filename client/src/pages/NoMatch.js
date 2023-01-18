@@ -29,15 +29,6 @@ import MenuItem from '@mui/material/MenuItem';
 
 const NoMatch = () => {
 
-  // querying the database on page load
-  const { loading, data } = useQuery(QUERY_ASSET, {
-    variables: { number: '1' }
-  });
-  const [currentAsset, setCurrentAsset] = React.useState('');
-
-  currentAsset = data;
-  console.log(currentAsset)
-
   const [asset, setAsset] = React.useState('');
   const handleAsetSelect = (event) => {
     setAsset(event.target.value);
@@ -72,7 +63,7 @@ const NoMatch = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography sx={{ mt: 3, ml: 2 }} variant="h6">
-                  {currentAsset.number}
+                  Asset Number
                 </Typography>
                 <List>
 
