@@ -2,11 +2,9 @@
 
 ## Table of Contents
 
--[Description](#description)
 - [About](#about)
 - [Team](#team)
 - [Purpose](#purpose)
-- [Requirements](#requirements)
 - [Technologies](#technologies)
 - [Functionality](#functionality)
 - [Screenshots](#screenshots)
@@ -14,7 +12,7 @@
 - [Future Development](#future-development)
 - [Github](#github)
 - [Deployed Application](#deployed-application)
-- [Credits](#credits)
+- [License](#license)
 
 ## About
 Sydney Water Asset Review & Maintenance or S.W.A.M.
@@ -58,6 +56,11 @@ GitHub
 
 4. Filling in a work order requires the user to complete all the text boxes and prompts which is then saved to the database
 
+## Screenshots
+
+![homepage/login](client/public/assets/homescreen.png)
+![alljobs-page](client/public/assets/alljobs.png)
+![workorder](client/public/assets/workorder.png)
 
 ## Future Development Plans
 
@@ -73,8 +76,8 @@ GitHub
 
  ## Deployed Application
 
- S.W.A.R.M. can be found deployed [here]()
+ S.W.A.R.M. can be found deployed [here](https://swarm.herokuapp.com/)
 
- ## Lisence
+ ## License
 
- None at the moment!
+None at the moment!
