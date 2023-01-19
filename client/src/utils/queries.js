@@ -30,6 +30,21 @@ export const QUERY_ASSET = gql`
   }
 `;
 
+export const QUERY_ALL_Assets = gql`
+query getAssets {
+    asset {
+      number
+      date
+      length
+      video
+      address
+      area
+      priority
+      status
+    }
+  }
+`;
+
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
     checkout(products: $products) {
