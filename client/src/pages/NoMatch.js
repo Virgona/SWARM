@@ -23,7 +23,6 @@ import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { useParams } from 'react-router-dom';
 
 const NoMatch = () => {
 
@@ -53,14 +52,11 @@ const NoMatch = () => {
   }
 
 
-  const { assetId } = useParams();
-  const { loading, data } = useQuery(QUERY_ASSET, {
-    variables: { assetId: assetId }
-  });
 
-  const asset = data?.asset;
-  if (loading) {
-    return <div>Loading...</div>;
+  const { data } = useQuery(QUERY_ASSET);
+  let asset;
+  if (data) {
+    asset = data.asset
   }
   return (
     <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
@@ -70,9 +66,7 @@ const NoMatch = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography sx={{ mt: 3, ml: 2 }} variant="h6">
-                  Asset Number: {asset && asset.map((through) => (
-                    asset.number
-                  ))}
+                  Asset Number: {asset.number}
 
                 </Typography>
 
@@ -80,31 +74,31 @@ const NoMatch = () => {
 
 
                   <ListItem>
-                    <ListItemText primary="Date:" />
+                    <ListItemText primary="Date: " >{asset.date} </ListItemText>
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary="Asset length:" />
+                    <ListItemText primary="Asset length:" >{asset.length} </ListItemText>
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary="Department:" />
+                    <ListItemText primary="Department:" >{asset.department} </ListItemText>
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary="Address:" />
+                    <ListItemText primary="Address:" >{asset.address} </ListItemText>
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary="Area:" />
+                    <ListItemText primary="Area:" >{asset.area} </ListItemText>
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary="Priority:" />
+                    <ListItemText primary="Priority:" >{asset.priority} </ListItemText>
                   </ListItem>
 
                   <ListItem>
-                    <ListItemText primary="Status:" />
+                    <ListItemText primary="Status:" >{asset.status} </ListItemText>
                   </ListItem>
 
                   <ListItem>
