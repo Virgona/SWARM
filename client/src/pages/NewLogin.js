@@ -30,8 +30,7 @@ function NewLogin(props) {
         console.log(formState)
     };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
+    const handleChange = (name, value) => {
         setFormState({
             ...formState,
             [name]: value,
@@ -57,7 +56,7 @@ function NewLogin(props) {
                                             label="Username"
                                             type="username"
                                             variant="filled"
-                                            onChange={handleChange}
+                                            onChange={(event) => handleChange('username', event.target.value)}
                                         />
                                     </Grid>
                                     <Grid item sx={{ ml: 3, mb: 3 }} xs={10}>
@@ -67,7 +66,7 @@ function NewLogin(props) {
                                             label="Password"
                                             type="password"
                                             variant="filled"
-                                            onChange={handleChange}
+                                            onChange={(event) => handleChange('password', event.target.value)}
                                         />
                                     </Grid>
 
