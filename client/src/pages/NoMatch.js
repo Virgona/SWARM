@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_ASSET } from '../utils/queries';
+import { useParams } from 'react-router-dom';
 
 // MUI styling imports
 import Container from '@mui/material/Container';
@@ -52,13 +53,13 @@ const NoMatch = () => {
   }
 
 
-
+  const { assetId } = useParams();
   const { data } = useQuery(QUERY_ASSET, {
     variables: {
-      asset: ''
+      asset: { assetId: assetId }
     }
   });
-  const asset = data?.asset;
+  const asset = data?.asset || [];
 
   if (!asset) {
     return null;
