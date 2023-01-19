@@ -4,19 +4,11 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
+    user: async (parent, { username }, context) => {
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+      const user = await User.findOne({ username });
 
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
+      return user;
     },
 
     asset: async (parent, { id }) => {
@@ -82,8 +74,9 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
+      console.log(username);
 
       if (!user) {
         throw new AuthenticationError('Incorrect credentials');

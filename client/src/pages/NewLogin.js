@@ -13,20 +13,21 @@ import FormGroup from '@mui/material/FormGroup';
 import Button from '@mui/material/Button';
 
 function NewLogin(props) {
-    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [formState, setFormState] = useState({ username: '', password: '' });
     const [login, { error }] = useMutation(LOGIN);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             const mutationResponse = await login({
-                variables: { email: formState.email, password: formState.password },
+                variables: { username: formState.username, password: formState.password },
             });
             const token = mutationResponse.data.login.token;
             Auth.login(token);
         } catch (e) {
             console.log(e);
         }
+        console.log(formState)
     };
 
     const handleChange = (event) => {
@@ -46,9 +47,19 @@ function NewLogin(props) {
                             Log In
                         </Typography>
 
-                        <FormGroup aria-label="position" row >
+                        <FormGroup aria-label="position" row>
                             <Grid container justify content="center" alignItems="center">
                                 <Grid container >
+                                    <Grid item sx={{ ml: 3, mb: 3 }} xs={10}>
+                                        <TextField
+                                            sx={{ width: '100%' }}
+                                            id="filled-password-input"
+                                            label="Username"
+                                            type="username"
+                                            variant="filled"
+                                            onChange={handleChange}
+                                        />
+                                    </Grid>
                                     <Grid item sx={{ ml: 3, mb: 3 }} xs={10}>
                                         <TextField
                                             sx={{ width: '100%' }}
@@ -56,21 +67,13 @@ function NewLogin(props) {
                                             label="Password"
                                             type="password"
                                             variant="filled"
+                                            onChange={handleChange}
                                         />
                                     </Grid>
 
-                                    <Grid item sx={{ ml: 3, mb: 3 }} xs={10}>
-                                        <TextField
-                                            sx={{ width: '100%' }}
-                                            id="filled-password-input"
-                                            label="Username"
-                                            type="Username"
-                                            variant="filled"
-                                        />
-                                    </Grid>
 
                                     <Grid item sx={{ ml: 3, mb: 3 }} xs={10} >
-                                        <Button variant="contained">Submit</Button>
+                                        <Button onClick={handleFormSubmit} variant="contained">Log In</Button>
                                     </Grid>
 
                                 </Grid>

@@ -1,4 +1,8 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+import Auth from '../../utils/auth'
+
+//MUI Stylings
 import ViewList from '@mui/icons-material/ViewList';
 import Logout from '@mui/icons-material/Logout';
 import ListAlt from '@mui/icons-material/ListAlt';
@@ -48,6 +52,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+const handleChange = async (event) => {
+  try {
+    Auth.logout();
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 const Nav = () => {
   const theme = useTheme();
@@ -104,7 +116,7 @@ const Nav = () => {
               <ListItemIcon>
                 <ListAlt />
               </ListItemIcon>
-              <ListItemText primary="Work Order" />
+              <Link to='/workorder'><ListItemText primary="Work Order" /></Link>
             </ListItemButton>
           </ListItem>
 
@@ -122,7 +134,7 @@ const Nav = () => {
               <ListItemIcon>
                 <ViewList />
               </ListItemIcon>
-              <ListItemText primary="All Jobs" />
+              <Link to='/alljobs'><ListItemText primary="All Jobs" /></Link>
             </ListItemButton>
           </ListItem>
 
@@ -131,7 +143,7 @@ const Nav = () => {
               <ListItemIcon>
                 <Logout />
               </ListItemIcon>
-              <ListItemText primary="Log out" />
+              <ListItemText onClick={handleChange} primary="Log out" />
             </ListItemButton>
           </ListItem>
         </List>

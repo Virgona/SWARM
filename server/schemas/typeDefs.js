@@ -36,8 +36,7 @@ const typeDefs = gql`
 
   type User {
     _id: ID
-    firstName: String
-    lastName: String
+    username: String
     email: String
   }
 
@@ -47,7 +46,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User
+    user(username: String): User
     assets: [Asset]
     asset(id: ID!, name: String): Asset
     workorders: [WorkOrder]
@@ -57,7 +56,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
     addAsset(_id: ID, number: String, date: Float, length: Float, address: String, area: String, priority: String, status: String): Asset
     addWorkOrder(contractor: String!, asset: String!, cctvFootage: String!, reviewed: String!, assesed: String!, acessibility: String!, reviewer: String!, cctvQuality: String!, cctvViewed: String!, additionalNotes: String!): WorkOrder
     updateWorkOrder(contractor: String, asset: String, cctvFootage: String, reviewed: String, assesed: String, acessibility: String, reviewer: String, cctvQuality: String, cctvViewed: String, additionalNotes: String): WorkOrder
