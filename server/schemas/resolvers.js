@@ -29,8 +29,7 @@ const resolvers = {
     },
 
     assets: async () => {
-      const foundAssets = await Asset.find();
-      return foundAssets;
+      return Asset.find();
     },
 
     workorders: async () => {
