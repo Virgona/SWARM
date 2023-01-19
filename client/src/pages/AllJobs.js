@@ -11,10 +11,7 @@ import { QUERY_ALL_Assets } from '../utils/queries';
 function AllJobs() {
 
   const { data } = useQuery(QUERY_ALL_Assets);
-  let assets;
-  if (data) {
-    assets = data?.assets
-  }
+  const assets = data?.assets || [];
 
   return (
     <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>

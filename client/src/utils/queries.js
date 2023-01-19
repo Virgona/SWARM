@@ -21,7 +21,6 @@ export const QUERY_ASSET = gql`
       number
       date
       length
-      video
       address
       area
       priority
@@ -32,11 +31,10 @@ export const QUERY_ASSET = gql`
 
 export const QUERY_ALL_Assets = gql`
 query getAssets {
-    asset {
+    assets {
       number
       date
       length
-      video
       address
       area
       priority

@@ -53,11 +53,17 @@ const NoMatch = () => {
 
 
 
-  const { data } = useQuery(QUERY_ASSET);
-  let asset;
-  if (data) {
-    asset = data.asset
+  const { data } = useQuery(QUERY_ASSET, {
+    variables: {
+      asset: ''
+    }
+  });
+  const asset = data?.asset;
+
+  if (!asset) {
+    return null;
   }
+
   return (
     <Container sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
       <Grid container rowSpacing={1} >
